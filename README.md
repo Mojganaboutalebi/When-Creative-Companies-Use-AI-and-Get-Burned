@@ -1,1 +1,717 @@
+[ai_backlash_cases.html](https://github.com/user-attachments/files/27219450/ai_backlash_cases.html)
 Case studies: how organisations communicate (or fail to) when AI use in creative work triggers public backlash. Sorted by sector.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Backlash Crisis Communications — Case Study Research</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #141414;
+    --surface2: #1c1c1c;
+    --border: #2a2a2a;
+    --text: #e8e4dc;
+    --muted: #6b6660;
+    --accent-game: #ff5c3a;
+    --accent-ad: #3ab5ff;
+    --accent-warn: #f5c542;
+    --tag-bg: #1f1f1f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 60px 0 48px;
+  }
+
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  h1 em {
+    font-style: normal;
+    -webkit-text-stroke: 1px var(--text);
+    color: transparent;
+  }
+
+  .header-desc {
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 620px;
+    font-family: 'DM Mono', monospace;
+    font-style: italic;
+  }
+
+  /* SECTOR TABS */
+  .sector-nav {
+    display: flex;
+    gap: 0;
+    margin: 40px 0 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tab-btn {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: -1px;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active-game { color: var(--accent-game); border-bottom-color: var(--accent-game); }
+  .tab-btn.active-ad { color: var(--accent-ad); border-bottom-color: var(--accent-ad); }
+
+  /* SECTION */
+  .section {
+    padding: 52px 0;
+    border-bottom: 1px solid var(--border);
+    display: none;
+    animation: fadeUp 0.4s ease;
+  }
+
+  .section.visible { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .sector-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 2px;
+    white-space: nowrap;
+    margin-top: 6px;
+  }
+
+  .pill-game { background: rgba(255,92,58,0.15); color: var(--accent-game); border: 1px solid rgba(255,92,58,0.3); }
+  .pill-ad { background: rgba(58,181,255,0.12); color: var(--accent-ad); border: 1px solid rgba(58,181,255,0.25); }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .section-intro {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 680px;
+    margin-bottom: 40px;
+    padding-left: 4px;
+    border-left: 2px solid var(--border);
+    padding-left: 16px;
+  }
+
+  /* CASE CARDS */
+  .cases-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .case-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .case-card:hover { border-color: var(--border); }
+  .case-card.game-card:hover { border-color: rgba(255,92,58,0.4); }
+  .case-card.ad-card:hover { border-color: rgba(58,181,255,0.35); }
+
+  .case-header {
+    padding: 22px 24px 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    user-select: none;
+  }
+
+  .case-meta {
+    flex: 1;
+  }
+
+  .case-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .case-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    background: var(--tag-bg);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  .tag.type-prod { color: var(--accent-game); border-color: rgba(255,92,58,0.2); background: rgba(255,92,58,0.07); }
+  .tag.type-promo { color: var(--accent-ad); border-color: rgba(58,181,255,0.2); background: rgba(58,181,255,0.07); }
+  .tag.type-both { color: var(--accent-warn); border-color: rgba(245,197,66,0.2); background: rgba(245,197,66,0.07); }
+  .tag.outcome-apology { color: #a3e6a0; border-color: rgba(163,230,160,0.2); background: rgba(163,230,160,0.06); }
+  .tag.outcome-defend { color: #f5a742; border-color: rgba(245,167,66,0.2); background: rgba(245,167,66,0.06); }
+  .tag.outcome-shutdown { color: #f56060; border-color: rgba(245,96,96,0.2); background: rgba(245,96,96,0.07); }
+
+  .toggle-icon {
+    font-size: 18px;
+    color: var(--muted);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .case-card.open .toggle-icon { transform: rotate(45deg); }
+
+  .case-body {
+    display: none;
+    padding: 0 24px 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .case-card.open .case-body { display: block; }
+
+  .case-body h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 20px 0 8px;
+  }
+
+  .case-body p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #c8c4bc;
+  }
+
+  .response-block {
+    background: var(--surface2);
+    border-left: 3px solid var(--border);
+    padding: 14px 16px;
+    border-radius: 0 3px 3px 0;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #b8b4ac;
+    font-style: italic;
+    margin: 10px 0;
+  }
+
+  .game-card .response-block { border-left-color: rgba(255,92,58,0.5); }
+  .ad-card .response-block { border-left-color: rgba(58,181,255,0.4); }
+
+  .source-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1px;
+    transition: color 0.15s;
+    margin-top: 6px;
+  }
+
+  .source-link:hover { color: var(--text); }
+
+  .analysis-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px dashed var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    margin-top: 16px;
+  }
+
+  .analysis-box h5 {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .analysis-box p {
+    font-size: 13px;
+    color: #9e9a94;
+  }
+
+  /* COMPARE TABLE */
+  .compare-section {
+    padding: 52px 0;
+  }
+
+  .compare-section h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 28px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  th {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 14px 14px;
+    border-bottom: 1px solid var(--border);
+    color: #bab6ae;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  td:first-child {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    color: var(--text);
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 0;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 0 20px; }
+    h1 { font-size: 1.8rem; }
+    .tab-btn { padding: 12px 16px; font-size: 11px; }
+    .case-header { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="header-label">Risk & Crisis Communications — Research Module</p>
+    <h1>When Creative Companies<br>Use <em>AI</em> and Get Burned</h1>
+    <p class="header-desc">// Case studies: how organisations communicate (or fail to) when AI use in creative work triggers public backlash. Sorted by sector.</p>
+
+    <nav class="sector-nav">
+      <button class="tab-btn active-game" onclick="showTab('gaming', this)">🎮 Gaming Industry</button>
+      <button class="tab-btn" onclick="showTab('advertising', this)">📺 Advertising & Marketing</button>
+    </nav>
+  </header>
+
+  <!-- ===== GAMING SECTION ===== -->
+  <div class="section visible" id="tab-gaming">
+    <div class="section-header">
+      <span class="sector-pill pill-game">Gaming</span>
+      <h2>AI in Game Development:<br>A Community That Doesn't Forgive</h2>
+    </div>
+    <p class="section-intro">Gaming audiences are among the most organised and vocal consumer communities in the world. Any AI involvement — even temporary placeholder use — is treated as a moral breach. Studios have faced everything from mass refund demands to complete shutdown.</p>
+
+    <div class="cases-grid">
+
+      <!-- CASE 1: The Alters / 11 bit studios -->
+      <div class="case-card game-card" id="c1">
+        <div class="case-header" onclick="toggleCard('c1')">
+          <div class="case-meta">
+            <p class="case-title">11 bit studios — The Alters (2025)</p>
+            <p style="font-size:13px; color:var(--muted); margin-top:4px;">AI placeholder text shipped in final product; discovered by players post-launch</p>
+            <div class="case-tags">
+              <span class="tag type-prod">In-Product AI</span>
+              <span class="tag outcome-apology">Apologised</span>
+              <span class="tag">Indie Studio</span>
+            </div>
+          </div>
+          <span class="toggle-icon">+</span>
+        </div>
+        <div class="case-body">
+          <h4>What Happened</h4>
+          <p>11 bit studios (known for <em>This War of Mine</em>) released <em>The Alters</em> in June 2025. Players discovered AI-generated text in background monitor graphics and AI-assisted translations in side content. Neither was disclosed before launch. The studio had also used AI for placeholder assets during development — a practice that became a crisis when proof surfaced publicly.</p>
+
+          <h4>The Crisis Response</h4>
+          <div class="response-block">"AI-generated assets were used strictly as temporary WIPs during the development process and in a very limited manner. Our team has always prioritized meaningful, handcrafted storytelling... During production, an AI-generated text for a graphic asset, which was meant as a piece of background texture, was used by one of our graphical designers as a placeholder."<br><br>— 11 bit studios statement, June 2025</div>
+
+          <h4>Why It Backfired</h4>
+          <p>The explanation didn't land. Players' main concern wasn't the scale of AI use — it was the lack of disclosure. The apology raised a new question: <em>how much more haven't we found?</em> Trust collapsed precisely because the company was reactive rather than proactive.</p>
+
+          <div class="analysis-box">
+            <h5>Crisis Comms Angle</h5>
+            <p>Classic case of a reactive disclosure strategy failing. The studio used a "minimal framing" defence (it was only placeholder), which is often ineffective when audiences feel deceived. Transparency before discovery is always preferable to damage control after.</p>
+          </div>
+
+          <h4>Source</h4>
+          <a class="source-link" href="https://aftermath.site/the-alters-ai-controversy/" target="_blank">↗ Aftermath — The Alters AI Controversy</a><br>
+          <a class="source-link" href="https://www.aiandgames.com/p/when-generative-ai-backlash-dominates" target="_blank">↗ AI and Games — When Generative AI Backlash Dominates</a>
+        </div>
+      </div>
+
+      <!-- CASE 2: Goonswarm / Postal -->
+      <div class="case-card game-card" id="c2">
+        <div class="case-header" onclick="toggleCard('c2')">
+          <div class="case-meta">
+            <p class="case-title">Goonswarm Games — Postal: Bullet Paradise (Dec 2025)</p>
+            <p style="font-size:13px; color:var(--muted); margin-top:4px;">AI promotional art allegations → studio shutdown within days</p>
+            <div class="case-tags">
+              <span class="tag type-promo">Promotional AI</span>
+              <span class="tag outcome-shutdown">Studio Closed</span>
+              <span class="tag">Extreme Outcome</span>
+            </div>
+          </div>
+          <span class="toggle-icon">+</span>
+        </div>
+        <div class="case-body">
+          <h4>What Happened</h4>
+          <p>In December 2025, indie studio Goonswarm Games was accused of using AI-generated art in promotional materials for <em>Postal: Bullet Paradise</em>. Publisher Running With Scissors initially defended the studio. Then, after an internal review, the publisher reversed course and confirmed AI influence was present in promo art. Goonswarm Games shut down entirely within days — citing death threats, harassment, and an impossible situation.</p>
+
+          <h4>The Crisis Response</h4>
+          <div class="response-block">"We want to start with a sincere apology to everyone affected by this situation — the community, our partners, and especially the artists who supported us... After taking that time and conducting an internal review, we agree with your criticism. The promo art does appear to include or be influenced by AI-generated material."<br><br>— Running With Scissors statement, December 2025</div>
+
+          <div class="response-block">"Our project, and everything we built over the past six years, was canceled in just a few days... Our studio was mistakenly accused of using AI-generated art in our games, and every attempt to clarify our work only escalated the situation."<br><br>— Goonswarm Games final statement</div>
+
+          <h4>Why It's Significant</h4>
+          <p>This is the most extreme outcome documented. The studio maintained it did not use AI — yet still shut down due to the reputational and personal harm caused by the backlash. It raises serious questions about proportionality of public response, and how small studios have no crisis resilience capacity.</p>
+
+          <div class="analysis-box">
+            <h5>Crisis Comms Angle</h5>
+            <p>A two-actor crisis: publisher and developer gave conflicting statements. The initial defensive posture from both parties amplified distrust. For small studios, there is essentially no safe escalation path once the community turns — a stark power asymmetry in AI backlash scenarios.</p>
+          </div>
+
+          <h4>Source</h4>
+          <a class="source-link" href="https://www.videogameschronicle.com/news/postal-game-developer-shuts-down-after-its-project-was-cancelled-due-to-allegations-of-generative-ai-use/" target="_blank">↗ Video Games Chronicle — Postal Developer Shuts Down</a>
+        </div>
+      </div>
+
+      <!-- CASE 3: Cygames -->
+      <div class="case-card game-card" id="c3">
+        <div class="case-header" onclick="toggleCard('c3')">
+          <div class="case-meta">
+            <p class="case-title">Cygames — AI Studio Announcement (Jan 2026)</p>
+            <p style="font-size:13px; color:var(--muted); margin-top:4px;">Founding an AI subsidiary triggers backlash before any AI is used in products</p>
+            <div class="case-tags">
+              <span class="tag type-prod">Organisational AI</span>
+              <span class="tag outcome-apology">Apologised</span>
+              <span class="tag">Japanese Studio</span>
+              <span class="tag">Preemptive Backlash</span>
+            </div>
+          </div>
+          <span class="toggle-icon">+</span>
+        </div>
+        <div class="case-body">
+          <h4>What Happened</h4>
+          <p>Cygames, the Japanese developer behind <em>Umamusume: Pretty Derby</em>, announced the founding of "Cygames AI Studio" — a new subsidiary to develop generative AI technology. No AI had been used in any of their products. The announcement alone was enough to trigger intense backlash across social media, particularly from their loyal fanbase.</p>
+
+          <h4>The Crisis Response</h4>
+          <div class="response-block">"Over the past few days, we've received numerous comments expressing anger and disappointment from many of you... We sincerely apologise for the concern we've caused. We would like to state that art produced from generative AI isn't used in our products. Furthermore, we won't implement generative AI into our products without prior notice. We hold in the highest regard those who love games, as well as the dignity, passion, and heart of the creators and artists."<br><br>— Cygames public statement, January 2026</div>
+
+          <h4>Why It's Significant</h4>
+          <p>The backlash was <em>anticipatory</em> — not based on any actual AI use. This shows how far gaming community sentiment has shifted: even organisational intention to explore AI is considered threatening. Cygames' apology was criticised for leaving the door open to future AI use, which shows that no amount of hedging satisfies the community.</p>
+
+          <div class="analysis-box">
+            <h5>Crisis Comms Angle</h5>
+            <p>A rare case of pre-emptive crisis — the announcement itself was the trigger, not the act. The cultural dimension is also notable: Cygames announced in Japanese, suggesting internal communication not aimed at a global audience, yet the backlash was swift and international. Demonstrates that audience trust now extends to <em>intent</em>, not just action.</p>
+          </div>
+
+          <h4>Source</h4>
+          <a class="source-link" href="https://www.screenhub.com.au/news/news/cygames-apology-ai-use-2690992/" target="_blank">↗ ScreenHub — Cygames Apologises, Downplays AI Plans</a>
+        </div>
+      </div>
+
+      <!-- CASE 4: Clair Obscur -->
+      <div class="case-card game-card" id="c4">
+        <div class="case-header" onclick="toggleCard('c4')">
+          <div class="case-meta">
+            <p class="case-title">Clair Obscur: Expedition 33 — Awards Revoked (Dec 2025)</p>
+            <p style="font-size:13px; color:var(--muted); margin-top:4px;">Game of the Year award rescinded hours after winning due to AI placeholder discovery</p>
+            <div class="case-tags">
+              <span class="tag type-prod">In-Product AI</span>
+              <span class="tag outcome-defend">Award Revoked</span>
+              <span class="tag">Zero Tolerance</span>
+            </div>
+          </div>
+          <span class="toggle-icon">+</span>
+        </div>
+        <div class="case-body">
+          <h4>What Happened</h4>
+          <p>In December 2025, breakout indie title <em>Clair Obscur: Expedition 33</em> won "Game of the Year" and "Best Debut" at a major independent game awards ceremony. Hours after the announcement, players discovered the developers had used AI-generated content as placeholder assets during production. Although the studio confirmed the placeholders had been replaced with hand-crafted assets five days after launch, the awards were rescinded.</p>
+
+          <h4>Why It's Significant</h4>
+          <p>The game had <em>replaced</em> the AI assets before shipping. The AI was gone. But the community's position was clear: any AI involvement — even temporary, even resolved — is disqualifying. This represents possibly the strictest documented community standard on AI in creative work to date.</p>
+
+          <div class="analysis-box">
+            <h5>Crisis Comms Angle</h5>
+            <p>Demonstrates how reputational damage in AI controversies is not proportional to the actual harm caused. The crisis was triggered by historical use, not present use. For communications strategy, this creates a nearly impossible standard: full retroactive disclosure of any AI touchpoint across the entire production history.</p>
+          </div>
+
+          <h4>Source</h4>
+          <a class="source-link" href="https://www.kidelight.com/2026/02/is-ai-ruining-gaming-backlash-explained.html" target="_blank">↗ Kidelight — Is AI Ruining Gaming? The Backlash Explained</a>
+        </div>
+      </div>
+
+    </div><!-- end cases-grid -->
+  </div><!-- end gaming section -->
+
+
+  <!-- ===== ADVERTISING SECTION ===== -->
+  <div class="section" id="tab-advertising">
+    <div class="section-header">
+      <span class="sector-pill pill-ad">Advertising</span>
+      <h2>AI in Advertising:<br>When Brands Lose the Room</h2>
+    </div>
+    <p class="section-intro">Unlike gaming communities, advertising audiences don't organise boycotts over AI — but they do express visceral disgust, and that sentiment hits brand equity directly. The common thread: AI feels like a cost-cut disguised as innovation.</p>
+
+    <div class="cases-grid">
+
+      <!-- CASE 1: Coca-Cola -->
+      <div class="case-card ad-card" id="c5">
+        <div class="case-header" onclick="toggleCard('c5')">
+          <div class="case-meta">
+            <p class="case-title">Coca-Cola — AI Christmas Ad "Holidays Are Coming" (Nov 2024)</p>
+            <p style="font-size:13px; color:var(--muted); margin-top:4px;">Remake of iconic 1995 Christmas ad using three AI studios. Called "soulless."</p>
+            <div class="case-tags">
+              <span class="tag type-promo">Promotional AI</span>
+              <span class="tag outcome-defend">Defended & Doubled Down</span>
+              <span class="tag">Global Brand</span>
+            </div>
+          </div>
+          <span class="toggle-icon">+</span>
+        </div>
+        <div class="case-body">
+          <h4>What Happened</h4>
+          <p>In November 2024, Coca-Cola released an AI-generated remake of its legendary 1995 "Holidays Are Coming" Christmas commercial. The ad was created in collaboration with three AI studios — Secret Level, Silverside AI, and Wild Card — using four different generative AI models. Critics described it as "soulless," "devoid of creativity," and a betrayal of the "Real Magic" tagline. The brand faced significant social media backlash and press coverage.</p>
+
+          <h4>Why Audiences Rejected It</h4>
+          <p>Marketing researchers noted a brand-fit problem: Coca-Cola's Christmas identity is built on emotional connection, nostalgia, and human warmth. AI, in the public perception, stands for the opposite. As one University of Wisconsin professor put it: <em>"AI is not a fit with holiday timing, but also, to some degree, with what the Coke brand means to people."</em></p>
+
+          <h4>The Crisis Response</h4>
+          <div class="response-block">Coca-Cola did not apologise. The brand and AI studio Secret Level doubled down. Secret Level's founder dismissed critics as "haters on the Internet" and claimed the spot "tested really well" with average consumers. Coca-Cola repeated the approach in 2025.</div>
+
+          <div class="analysis-box">
+            <h5>Crisis Comms Angle</h5>
+            <p>A "stand your ground" strategy from a brand powerful enough to absorb the backlash. But this only works at Coca-Cola's scale. The strategy also relies on a split audience — creative industry professionals (vocal opponents) vs. average consumers (largely indifferent). Smaller brands cannot afford this gamble. The 2025 repeat also signals that Coke has institutionalised AI as part of its production pipeline regardless of public sentiment.</p>
+          </div>
+
+          <h4>Sources</h4>
+          <a class="source-link" href="https://www.nbcnews.com/tech/innovation/coca-cola-causes-controversy-ai-made-ad-rcna180665" target="_blank">↗ NBC News — Coca-Cola Causes Controversy With AI-Generated Ad</a><br>
+          <a class="source-link" href="https://www.mensjournal.com/news/coca-cola-ai-christmas-ad-commercial-backlash-creator-response" target="_blank">↗ Men's Journal — Coca-Cola AI Ad Backlash: Creator's Blunt Response</a>
+        </div>
+      </div>
+
+      <!-- CASE 2: Toys R Us -->
+      <div class="case-card ad-card" id="c6">
+        <div class="case-header" onclick="toggleCard('c6')">
+          <div class="case-meta">
+            <p class="case-title">Toys "R" Us — Sora-Generated Brand Film (June 2024)</p>
+            <p style="font-size:13px; color:var(--muted); margin-top:4px;">First major brand film made with OpenAI's Sora. Premiered at Cannes. Tore apart online.</p>
+            <div class="case-tags">
+              <span class="tag type-promo">Promotional AI</span>
+              <span class="tag outcome-defend">Called It Successful</span>
+              <span class="tag">Heritage Brand</span>
+            </div>
+          </div>
+          <span class="toggle-icon">+</span>
+        </div>
+        <div class="case-body">
+          <h4>What Happened</h4>
+          <p>In June 2024, Toys "R" Us released what was promoted as the first major brand film created entirely with OpenAI's text-to-video tool Sora. The 66-second film told the origin story of founder Charles Lazarus. It premiered at the Cannes Lions Festival. Within days, it became one of the most mocked AI commercials of the year.</p>
+
+          <h4>Specific Criticisms</h4>
+          <p>Critics — including <em>Avengers: Endgame</em> director Joe Russo — called it unwatchable. Specific issues raised: visual inconsistency (the character looked like a different person in each shot); the "uncanny valley" effect on human faces; energy consumption concerns; and the perception that the brand was replacing human actors and animators to cut costs. The brand disabled comments on its Instagram post of the ad.</p>
+
+          <h4>The Crisis Response</h4>
+          <div class="response-block">A Toys "R" Us executive told NBC News the video was "successful" despite controversy, and the brand would add generative AI to its "tool kit" going forward. No apology was issued. The CMO's original press release had framed the ad as "leaping ahead of the curve."</div>
+
+          <div class="analysis-box">
+            <h5>Crisis Comms Angle</h5>
+            <p>Particularly tone-deaf for a brand already struggling with market relevance and a bankruptcy history. The "it tested well internally" defence ignores the public relations dimension entirely. Disabling Instagram comments while claiming success is a contradictory signal. This case illustrates how innovation-first framing backfires when execution quality is poor.</p>
+          </div>
+
+          <h4>Sources</h4>
+          <a class="source-link" href="https://www.nbcnews.com/tech/internet/toys-r-us-ai-video-ad-controversy-explained-commercial-rcna159030" target="_blank">↗ NBC News — Toys R Us AI Video Controversy Explained</a><br>
+          <a class="source-link" href="https://decrypt.co/237017/ai-film-toys-r-us-sora-controversy" target="_blank">↗ Decrypt — Toys R Us AI Film Controversy</a>
+        </div>
+      </div>
+
+    </div><!-- end cases grid -->
+  </div><!-- end advertising section -->
+
+
+  <!-- COMPARE TABLE -->
+  <div class="compare-section">
+    <h2>Cross-Sector Comparison</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Gaming</th>
+          <th>Advertising</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Audience Response</td>
+          <td>Organised, sustained, extreme — boycotts, refund demands, harassment campaigns</td>
+          <td>Viral disgust, mockery — rarely sustained or organised</td>
+        </tr>
+        <tr>
+          <td>AI Type Triggering Backlash</td>
+          <td>In-product AI (even temporary/placeholder use)</td>
+          <td>Promotional AI — the creative execution itself</td>
+        </tr>
+        <tr>
+          <td>Common Crisis Strategy</td>
+          <td>Apology + minimal framing ("only placeholders")</td>
+          <td>Defend + reframe as innovation ("first-ever," "tested well")</td>
+        </tr>
+        <tr>
+          <td>Strategy Effectiveness</td>
+          <td>Low — community demands zero-tolerance, not explanation</td>
+          <td>Medium — brand power determines survivability</td>
+        </tr>
+        <tr>
+          <td>Cultural Dimension</td>
+          <td>Japanese studios face global backlash despite local framing (Cygames)</td>
+          <td>Western heritage brands hit hardest when nostalgia is violated (Coca-Cola, Toys R Us)</td>
+        </tr>
+        <tr>
+          <td>Disclosure Timing</td>
+          <td>Always reactive — discovered by community, not disclosed proactively</td>
+          <td>Often upfront — AI use promoted as a feature, then backfires</td>
+        </tr>
+        <tr>
+          <td>Worst-Case Outcome</td>
+          <td>Studio shutdown (Goonswarm Games)</td>
+          <td>Brand ridicule + comment disabling (Toys R Us)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>Research compiled April 2026 · Sources: NBC News, Aftermath, Video Games Chronicle, ScreenHub, AI and Games, Men's Journal · For academic use</p>
+  </footer>
+
+</div>
+
+<script>
+  function showTab(tab, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+    document.getElementById('tab-' + tab).classList.add('visible');
+    document.querySelectorAll('.tab-btn').forEach(b => b.className = 'tab-btn');
+    btn.className = 'tab-btn active-' + (tab === 'gaming' ? 'game' : 'ad');
+  }
+
+  function toggleCard(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
